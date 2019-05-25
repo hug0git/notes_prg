@@ -1,6 +1,5 @@
 c=0
 n=0
-notestr="0"
 path="C:/Users/hugod/Documents/python_simon/notes_prg/notes/"
 import os
 os.chdir(path)
@@ -8,11 +7,17 @@ print(os.getcwd())
 
 #FONCTIONS
 def add(files):
-    name=input("Entrer le NOM de l'élève :")
-    name2=input("Entrer le PRENOM de l'élève :")
-    note=float(input("Entrer une note (sur 20):"))
+    name = input("Entrer le NOM de l'élève :")
+    name2 = input("Entrer le PRENOM de l'élève :")
+    note="0"
+    while type(note) is not float:
+        try:
+            note = input("Entrer une note (sur 20):")
+            note = float(note.replace(",","."))
+        except:
+            print("La note n'est pas valide")
     f = open(files +".txt",'a')
-    f.write(name + " " + name2 + " " + notestr)
+    f.write(name + " " + name2 + " " + str(note))
     f.close
     
 def disp(files):
