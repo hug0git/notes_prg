@@ -21,7 +21,15 @@ def add(files):
     f.write(str(note) + " " + name + " " + name2)
     f.close
     
-def disp(files):
+def dispD(files):
+    try:
+        print(files)
+        f=open(files + ".txt",'r')
+        return(f)
+    except:
+        print("Désolé, ce fichier n'existe pas.")
+        
+def dispE(name):
     try:
         print(files)
         f=open(files + ".txt",'r')
@@ -32,7 +40,12 @@ def disp(files):
 def new(files):
     nf=open(files + ".txt",'w')
     return(nf)
-    
+   
+def del(files):
+    nf=open(files + ".txt",'w')
+    nf.close
+    return(nf)
+     
 def redir():
     import os
     os.chdir(path)
@@ -47,7 +60,7 @@ while c!=6: #Tant que c est différent on reste dans le programme sinon si c=6 =
     except:
         print("Veuillez choisir un chiffre entre 1 et 6!")
     
-    #Choix 1
+    #1 NOUVEAU DEVOIR
     if c==1:
         L=[]
         redir()
@@ -55,8 +68,7 @@ while c!=6: #Tant que c est différent on reste dans le programme sinon si c=6 =
         if os.path.isfile(path + files + ".txt"):
             print("Le devoir existe déjà !")
         else:
-            f=new(files)
-            f.close()
+            new(files)
             n=0
             while n not in [1,2]:
                 print("Souhaitez-vous saisir des notes ?:\n 1.Oui\n 2.Non")
@@ -69,22 +81,29 @@ while c!=6: #Tant que c est différent on reste dans le programme sinon si c=6 =
                 if n==1:
                     add(files)
         
-    #Choix 2
+    #2 CONSULTER
     if c==2:
+        print("Souhaitez-vous consulter les notes d'un devoir ou d'un élève ?:\n 1.Devoir\n 2.Elève\n 3.Annuler")
+        try:
+            n=int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
+            if n not in [1,2,3]:
+                print("Veuillez choisir 1, 2 ou 3!")
+        except:
+            print("Veuillez choisir 1, 2 ou 3!")
         files=input("Saisissez le nom du fichier que vous souhaitez consulter:")
         folders=disp(files)
         print(folders)
         f.close()
 
-    #Choix 3
+    #AJOUTER/MODIFIER
     if c==3:
         print("test")
         
-    #Choix 4
+    #MOYENNE
     if c==4:
         print("test")
            
-    #Choix 5
+    #SUPPRIMER
     if c==5:
         print("test")
         
