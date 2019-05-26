@@ -10,14 +10,15 @@ def add(files):
     name = input("Entrer le NOM de l'élève :")
     name2 = input("Entrer le PRENOM de l'élève :")
     note="0"
-    while type(note) is not float:
+    while type(note) is not float or note!="Abs":
         try:
-            note = input("Entrer une note (sur 20):")
-            note = float(note.replace(",","."))
+            note = input("Entrer une note (sur 20) ou Abs si l'élève était absent:")
+            if note!="Abs":
+                note = float(note.replace(",","."))
         except:
             print("La note n'est pas valide")
     f = open(files +".txt",'a')
-    f.write(name + " " + name2 + " " + str(note))
+    f.write(str(note) + " " + name + " " + name2)
     f.close
     
 def disp(files):
