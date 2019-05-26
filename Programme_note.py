@@ -10,7 +10,7 @@ def add(files):
     name = input("Entrer le NOM de l'élève :")
     name2 = input("Entrer le PRENOM de l'élève :")
     note="0"
-    while type(note) is not float or note!="Abs":
+    while type(note) is not float and note!="Abs":
         try:
             note = input("Entrer une note (sur 20) ou Abs si l'élève était absent:")
             if note!="Abs":
