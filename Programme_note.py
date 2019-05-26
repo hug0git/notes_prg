@@ -8,7 +8,7 @@ os.chdir(path)
 print(os.getcwd())
 
 #FONCTIONS
-def add(files):
+def add(file):
     ca = 0
     while ca != 2:
         ca = 0
@@ -22,7 +22,7 @@ def add(files):
                     note = float(note.replace(",","."))
             except:
                 print("La note n'est pas valide")
-        f = open(files +".txt",'a')
+        f = open(file +".txt",'a')
         f.write(str(note) + " " + name + " " + name2 + "\n")
         f.close
         while ca not in [1,2]:
@@ -36,15 +36,15 @@ def add(files):
 def edit ():
     print("lol")
     
-def ask(files):
+def ask(file):
     try:
-        f=open(files + ".txt",'r')
+        f=open(file + ".txt",'r')
     except:
         print("Désolé, ce fichier n'existe pas.")
     
-def dispD(files):
+def dispD(file):
     try:
-        f=open(files + ".txt",'r')
+        f=open(file + ".txt",'r')
         for x in f:
             print(x)
     except:
@@ -58,14 +58,12 @@ def dispE(name):
     except:
         print("Désolé, ce fichier n'existe pas.")
 
-def new(files):
-    nf=open(files + ".txt",'w')
+def new(file):
+    nf=open(file + ".txt",'w')
     return(nf)
    
-def delete(files):
-    nf=open(files + ".txt",'w')
-    nf.close
-    return(nf)
+def delete(file):
+    os.remove(path + file + ".txt")
      
 def redir():
     import os
@@ -105,6 +103,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
         
     #2 CONSULTER
     if c == 2:
+        redir()
         c == 0
         while co!= 3:
             print("Souhaitez-vous consulter les notes d'un devoir ou d'un élève ?:\n 1.Devoir\n 2.Elève\n 3.Annuler")
@@ -122,8 +121,9 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 nameD = input("Entrer le NOM de l'élève :")
                 name2D = input("Entrer le PRENOM de l'élève :")
 
-    #AJOUTER/MODIFIER
+    #3 AJOUTER/MODIFIER
     if c == 3:
+        redir()
         c == 0
         while ce!= 3:
             print("Souhaitez-vous ajouter ou modifier des notes ?:\n 1.Ajouter\n 2.Modifier\n 3.Annuler")
@@ -143,11 +143,11 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 name2E = input("Entrer le PRENOM de l'élève :")
                 ce = 3
         
-    #MOYENNE
+    #4 MOYENNE
     if c == 4:
         print("test")
            
-    #SUPPRIMER
+    #5 SUPPRIMER
     if c == 5:
         print("test")
         
