@@ -149,6 +149,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
            
     #5 SUPPRIMER
     if c == 5:
-        print("test")
+        df = ask()
+        delete(df)
         
         
