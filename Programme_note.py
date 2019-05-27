@@ -36,12 +36,19 @@ def add(file):
 def edit ():
     print("lol")
     
-def ask(file):
-    try:
-        f=open(file + ".txt",'r')
-    except:
-        print("Désolé, ce fichier n'existe pas.")
-    
+def ask():
+    askn = 0
+    while askn == 0:
+        file = input("Nom du devoir:")
+        if os.path.isfile(path + file + ".txt"):
+            return file
+            askn = 1
+        elif file == "Annuler":
+            return file
+        else:
+            print("Désolé, ce fichier n'existe pas.")
+            askn = 0
+
 def dispD(file):
     try:
         f=open(file + ".txt",'r')
@@ -114,12 +121,16 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
             except:
                 print("Veuillez choisir 1, 2 ou 3!")
             if co == 1:
-                filesD = input("Saisissez le nom du devoir que vous souhaitez consulter:")
-                nd = dispD(filesD)
-                print(nd)
+                print("Consulter les notes d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
+                fileD = ask()
+                if fileD != "Annuler":
+                    nd = dispD(fileD)
+                    print(nd)
+                co = 3
             if co == 2:
                 nameD = input("Entrer le NOM de l'élève :")
                 name2D = input("Entrer le PRENOM de l'élève :")
+                co = 3
 
     #3 AJOUTER/MODIFIER
     if c == 3:
@@ -134,8 +145,11 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
             except:
                 print("Veuillez choisir 1, 2 ou 3!")
             if ce == 1:
-                filesA = ask()
-                add(filesA)
+                print("Ajouter une note à un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
+                fileA = ask()
+                if fileA != "Annuler":
+                    filesA = ask()
+                    add(filesA)
                 ce = 3
             if ce == 2:
                 filesA = input("Saisissez le nom du devoir:")
@@ -149,7 +163,9 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
            
     #5 SUPPRIMER
     if c == 5:
-        df = ask()
-        delete(df)
+        print("Supprimer un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
+        fileR = ask()
+        if fileR != "Annuler":
+            delete(fileR)
         
         
