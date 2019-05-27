@@ -8,23 +8,26 @@ os.chdir(path)
 print(os.getcwd())
 
 #FONCTIONS
-def add(file):
+def add(file): #fonction pour ajouter une nouvelle note
     ca = 0
     while ca != 2:
         ca = 0
         name = input("Entrer le NOM de l'élève :")
         name2 = input("Entrer le PRENOM de l'élève :")
         note = "0"
-        while type(note) is not float and note != "Abs":
+        #permet de vérifier la validité de la note (nombre ou Abs)
+        while type(note) is not float and note != "Abs": 
             try:
                 note = input("Entrer une note (sur 20) ou Abs si l'élève était absent:")
                 if note != "Abs":
                     note = float(note.replace(",","."))
             except:
                 print("La note n'est pas valide")
+        #ouvre le fichier et écrit nom, prénom et note
         f = open(file +".txt",'a')
         f.write(str(note) + " " + name + " " + name2 + "\n")
         f.close
+        #demande si on veut saisir une autre note. Si oui on retourne au while du début sinon on quitte la boucle
         while ca not in [1,2]:
             print("Souhaitez-vous saisir une autre note ?:\n 1.Oui\n 2.Non")
             try:
@@ -36,7 +39,7 @@ def add(file):
 def edit ():
     print("lol")
     
-def ask():
+def ask(): #fonction pour demander le nom du devoir. Si on rentre "Annuler", le programme annule l'action en cours et nous renvoie sur le menu principal
     askn = 0
     while askn == 0:
         file = input("Nom du devoir:")
@@ -65,11 +68,11 @@ def dispE(name):
     except:
         print("Désolé, ce fichier n'existe pas.")
 
-def new(file):
+def new(file): #fonction pour créer un fichier
     nf=open(file + ".txt",'w')
     return(nf)
    
-def delete(file):
+def delete(file): #fonction pour supprimer un fichier
     os.remove(path + file + ".txt")
      
 def redir():
@@ -91,11 +94,11 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
         c == 0
         L = []
         redir()
-        files = input("Saisissez le nom du devoir:")
-        if os.path.isfile(path + files + ".txt"):
+        file = input("Saisissez le nom du devoir:")
+        if os.path.isfile(path + file + ".txt"):
             print("Le devoir existe déjà !")
-        else:
-            new(files)
+        elif file != "Annuler":
+            new(file)
             n = 0
             while n not in [1,2]:
                 print("Souhaitez-vous saisir des notes ?:\n 1.Oui\n 2.Non")
@@ -106,7 +109,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 except:
                     print("Veuillez choisir 1 ou 2!")
                 if n == 1:
-                    add(files)
+                    add(file)
         
     #2 CONSULTER
     if c == 2:
