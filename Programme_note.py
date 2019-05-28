@@ -15,12 +15,16 @@ def add(file): #fonction pour ajouter une nouvelle note
         name = input("Entrer le NOM de l'élève :")
         name2 = input("Entrer le PRENOM de l'élève :")
         note = "0"
-        #permet de vérifier la validité de la note (nombre ou Abs)
-        while type(note) is not float and note != "Abs": 
+        checkp = -1
+        #permet de vérifier la validité de la note (nombre positif ou Abs)
+        while type(note) is not float and note != "Abs" and checkp < 0: 
             try:
-                note = input("Entrer une note (sur 20) ou Abs si l'élève était absent:")
+                note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
                 if note != "Abs":
-                    note = float(note.replace(",","."))
+                    note = float(note.replace(",",".")) 
+                    checkp = note
+                if checkp < 0:
+                    print("La note doit être positive!")
             except:
                 print("La note n'est pas valide")
         #ouvre le fichier et écrit nom, prénom et note
@@ -155,9 +159,12 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                     add(filesA)
                 ce = 3
             if ce == 2:
-                filesA = input("Saisissez le nom du devoir:")
-                nameE = input("Entrer le NOM de l'élève :")
-                name2E = input("Entrer le PRENOM de l'élève :")
+                print("Modifier une note d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
+                fileU = ask()
+                if fileU != "Annuler":
+                    filesU = ask()
+                    name = askN()
+                    edit(filesU)
                 ce = 3
         
     #4 MOYENNE
