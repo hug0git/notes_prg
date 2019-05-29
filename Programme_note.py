@@ -16,17 +16,23 @@ def add(file): #fonction pour ajouter une nouvelle note
         name2 = input("Entrer le PRENOM de l'élève :")
         note = "0"
         checkp = -1
+        whilecheck = 0
         #permet de vérifier la validité de la note (nombre positif ou Abs)
-        while type(note) is not float and note != "Abs" and checkp < 0: 
+        while whilecheck == 0: 
             try:
                 note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
                 if note != "Abs":
                     note = float(note.replace(",",".")) 
                     checkp = note
+                    whilecheck = 1
                 if checkp < 0:
                     print("La note doit être positive!")
+                    whilecheck = 0
+                if note == "Abs":
+                    whilecheck = 1
             except:
                 print("La note n'est pas valide")
+                whilecheck = 0
         #ouvre le fichier et écrit nom, prénom et note
         f = open(file +".txt",'a')
         f.write(str(note) + " " + name + " " + name2 + "\n")
@@ -40,6 +46,7 @@ def add(file): #fonction pour ajouter une nouvelle note
                     print("Veuillez choisir 1 ou 2!")
             except:
                 print("Veuillez choisir 1 ou 2!")
+                
 def edit ():
     print("lol")
     
@@ -55,14 +62,41 @@ def ask(): #fonction pour demander le nom du devoir. Si on rentre "Annuler", le 
         else:
             print("Désolé, ce fichier n'existe pas.")
             askn = 0
-
-def dispD(file):
-    try:
-        f=open(file + ".txt",'r')
-        for x in f:
-            print(x)
-    except:
-        print("Désolé, ce fichier n'existe pas.")
+            
+def getNote(file, nbligne):
+    i = 0
+    f=open(file + ".txt",'r')
+    for i in range(1, nbligne):
+        note = f.readline()
+        note = note.split()
+    f.close
+    return note[0]
+        
+    
+def getName(file, nbligne):
+    i = 0
+    f=open(file + ".txt",'r')
+    for i in range(1, nbligne):
+        name = f.readline()
+        name = name.split()
+    f.close
+    return name[1]
+    
+def getLignFromName(file, name):
+    
+def lignCount(file):   
+    i = 0
+    f=open(file + ".txt",'r')
+    for x in f:
+        i += 1
+    f.close
+    return i
+    
+def dispD(file, nbc):
+    f=open(file + ".txt",'r')
+    for lign in range(1, nbc):
+        
+        print(name + " : " + note)
         
 def dispE(name):
     try:
