@@ -194,7 +194,11 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 fileU = ask()
                 if fileU != "Annuler": 
                     filesU = ask()
-                    name = askN()
+                    name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
+                    name2 = input("Entrer le PRENOM de l'élève :")
+                    name = name.replace(" ", "_")
+                    name2 = name2.replace(" ", "_")
+                    name = name + "_" + name2
                     edit(filesU)
                 ce = 3
         
