@@ -37,7 +37,9 @@ def add(file): #fonction pour ajouter une nouvelle note
                 whilecheck = 0
         
         f = open(file +".txt",'a') #ouvre le fichier et écrit nom, prénom et note
-        f.write(str(note) + " " + name + " " + name2 + "\n")
+        name = name.replace(" ", "_")
+        name2 = name2.replace(" ", "_")
+        f.write(str(note) + " " + name + "_" + name2 + "\n")
         f.close
         #demande dans la foulée si on veut saisir une autre note. Si oui on retourne au while du début sinon on quitte la boucle
         while ca not in [1,2]:
@@ -66,23 +68,25 @@ def ask(): #fonction pour demander le nom du devoir. Si on rentre "Annuler", le 
             askn = 0
             
 def getNote(file, nbligne):
-    i = 0
+    note = "0"
     f=open(file + ".txt",'r')
-    for i in range(1, nbligne):
-        ligne = f.readline()
-        note = ligne.split()
-    f.close
+    liste = f.readlines()
+    f.close()
+    ligne = liste[nbligne]
+    note = ligne.split()
     return note[0]
         
     
 def getName(file, nbligne):
-    i = 0
+    name = "0"
     f=open(file + ".txt",'r')
-    for i in range(1, nbligne):
-        name = f.readline()
-        name = name.split()
-    f.close
-    return name[1]
+    liste = f.readlines()
+    f.close()
+    ligne = liste[nbligne]
+    name = ligne.split()
+    name = name[1]
+    name = name.replace("_", " ")
+    return name
     
 #def getLignFromName(file, name):
     
@@ -93,20 +97,6 @@ def lignCount(file):   # fonction qui sert a compter le nombre de ligne
         i += 1   #i = i + 1
     f.close
     return i
-    
-def dispD(file, nbc):
-    f=open(file + ".txt",'r')
-    for lign in range(1, nbc):
-        
-        print(name + " : " + note)
-        
-def dispE(name):
-    try:
-        print(files)
-        f=open(files + ".txt",'r')
-        return(f)
-    except:
-        print("Désolé, ce fichier n'existe pas.")
 
 def new(file): #fonction pour créer un fichier
     nf=open(file + ".txt",'w')
@@ -167,8 +157,14 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 print("Consulter les notes d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
                 fileD = ask()
                 if fileD != "Annuler":
-                    nd = dispD(fileD)
-                    print(nd)
+                    nbligne = lignCount(fileD)
+                    total = 0
+                    numberline = 0
+                    for numberline in range (0, nbligne):
+                        note = getNote(fileD, numberline)
+                        name = getName(fileD, numberline)
+                        print(name + " : " + note)
+                    moyenne = total / nbligne
                 co = 3
             if co == 2:
                 nameD = input("Entrer le NOM de l'élève :")
@@ -178,7 +174,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
     #3 AJOUTER/MODIFIER
     if c == 3:
         redir()
-        c == 0
+        c = 0
         while ce!= 3:
             print("Souhaitez-vous ajouter ou modifier des notes ?:\n 1.Ajouter\n 2.Modifier\n 3.Annuler")
             try:
@@ -204,6 +200,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
         
     #4 MOYENNE
     if c == 4:
+        c = 0
         while ce!= 2:
             print("Souhaitez-vous consulter la moyenne d'un devoir ?:\n 1.Devoir\n 2.Annuler")
             try:
@@ -219,11 +216,11 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                     nbligne = lignCount(fichier)
                     total = 0
                     numberline = 0
-                    for numberline in range (1, nbligne):
+                    for numberline in range (0, nbligne):
                         note2 = getNote(fichier, numberline)
-                        total += float(note)
+                        total += float(note2)
                     moyenne = total / nbligne
-                    print(moyenne)
+                    print("Moyenne du devoir : "+ moyenne)
                 ce = 2
            
     #5 SUPPRIMER
