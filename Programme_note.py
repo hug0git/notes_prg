@@ -3,7 +3,7 @@ n = 0
 co = 0
 ce = 0
 menu = True
-path = "C:/Users/hugod/Documents/python_simon/notes_prg/notes/"
+path = "C:/Users/hugod/Documents/python_simon/notes_prg/notes/" #mettre un "/" à la fin
 import os
 os.chdir(path)
 print(os.getcwd())
@@ -12,7 +12,7 @@ print(os.getcwd())
 
 def add(file): #fonction pour ajouter une nouvelle note
     ca = 0   
-    while ca != 2: # la variable ca servira pour le menu
+    while ca != 2: # la variable 'ca' servira pour le menu
         ca = 0
         name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
         name2 = input("Entrer le PRENOM de l'élève :")
@@ -124,6 +124,7 @@ def redir():
 while menu: #Tant que c est différent on reste dans le programme sinon si c=6 ==> "Quitter" donc on sort du programme
     print("MENU:\n 1.Nouveau devoir\n 2.Consulter des notes\n 3.Ajouter/Modifier des notes\n 4.Obtenir une moyenne\n 5.Supprimer un devoir\n 6.Quitter\n")
     try:
+        c = 0
         c = int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
         if c not in [1,2,3,4,5,6]:
             print("Veuillez choisir un chiffre entre 1 et 6!")
