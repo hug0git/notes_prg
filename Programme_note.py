@@ -132,7 +132,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
     
     #1 NOUVEAU DEVOIR
     if c == 1:
-        c == 0
+        c = 0
         redir()
         fichier = input("Saisissez le nom du devoir ou Annuler pour revenir au menu précédent:")
         if os.path.isfile(path + fichier + ".txt"):
@@ -153,7 +153,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
         
     #2 CONSULTER
     elif c == 2:
-        c == 0
+        c = 0
         redir()
         while co!= 3:
             print("Souhaitez-vous consulter les notes d'un devoir ou d'un élève ?:\n 1.Devoir\n 2.Elève\n 3.Annuler")
