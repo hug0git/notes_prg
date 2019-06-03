@@ -2,6 +2,7 @@ c = 0
 n = 0
 co = 0
 ce = 0
+menu = True
 path = "C:/Users/hugod/Documents/python_simon/notes_prg/notes/"
 import os
 os.chdir(path)
@@ -120,7 +121,7 @@ def redir():
 
 ## DEBUT DU PROGRAMME
 
-while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6 ==> "Quitter" donc on sort du programme
+while menu: #Tant que c est différent on reste dans le programme sinon si c=6 ==> "Quitter" donc on sort du programme
     print("MENU:\n 1.Nouveau devoir\n 2.Consulter des notes\n 3.Ajouter/Modifier des notes\n 4.Obtenir une moyenne\n 5.Supprimer un devoir\n 6.Quitter\n")
     try:
         c = int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
@@ -151,9 +152,9 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                     add(fichier)
         
     #2 CONSULTER
-    if c == 2:
-        redir()
+    elif c == 2:
         c == 0
+        redir()
         while co!= 3:
             print("Souhaitez-vous consulter les notes d'un devoir ou d'un élève ?:\n 1.Devoir\n 2.Elève\n 3.Annuler")
             try:
@@ -174,10 +175,13 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                         name = getName(fileD, numberline)
                         print(name + " : " + note) #affiche nom + note
                 co = 3
-            
+            if co == 2:
+                nameD = input("Entrer le NOM de l'élève :")
+                name2D = input("Entrer le PRENOM de l'élève :")
+                co = 3
 
     #3 AJOUTER/MODIFIER
-    if c == 3:
+    elif c == 3:
         redir()
         c = 0
         while ce!= 3:
@@ -227,7 +231,7 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 ce = 3
         
     #4 MOYENNE
-    if c == 4:
+    elif c == 4:
         redir()
         c = 0
         while ce!= 2:
@@ -245,18 +249,26 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                     nbligne = lignCount(fichier) #permet d'obtenir le nombre de lignes dans le fichier
                     total = 0
                     numberline = 0
+                    nbnote = nbligne
                     for numberline in range (0, nbligne): #permet d'obtenir toutes les notes du fichier en parcourant chaque ligne 
                         note2 = getNote(fichier, numberline) 
-                        total += float(note2) #incrément le total avec la valeur de la note
-                    moyenne = total / nbligne #total des noytes / nombre de lignes (nombre de notes)
-                    print("Moyenne du devoir : "+ moyenne)
+                        if note2 != "Abs": 
+                            total += float(note2) #incrément le total avec la valeur de la note
+                        else:
+                            nbnote -= 1
+                    moyenne = total / nbnote #total des noytes / nombre de lignes (nombre de notes)
+                    print("Moyenne du devoir : "+ str(moyenne))
                 ce = 2
            
     #5 SUPPRIMER
-    if c == 5:
+    elif c == 5:
         print("Supprimer un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
         fileR = ask()
         if fileR != "Annuler":
             delete(fileR)
+            
+    #6 QUITTER
+    elif c == 6:
+        menu = False
         
         
