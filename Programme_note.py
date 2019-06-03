@@ -7,7 +7,7 @@ import os
 os.chdir(path)
 print(os.getcwd())
 
-## Nous allons premierement créer toutes les fonctions dont nous allons avoir besoin dans la suite du programme
+## Nous allons premièrement définir toutes les fonctions dont nous allons avoir besoin dans la suite du programme
 
 def add(file): #fonction pour ajouter une nouvelle note
     ca = 0   
@@ -16,7 +16,6 @@ def add(file): #fonction pour ajouter une nouvelle note
         name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
         name2 = input("Entrer le PRENOM de l'élève :")
         whilecheck = 0
-      
         while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
             try:
                 note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
@@ -37,8 +36,8 @@ def add(file): #fonction pour ajouter une nouvelle note
                 whilecheck = 0
         
         f = open(file +".txt",'a') #ouvre le fichier et écrit nom, prénom et note
-        name = name.replace(" ", "_")
-        name2 = name2.replace(" ", "_")
+        name = name.replace(" ", "_").lower()
+        name2 = name2.replace(" ", "_").lower()
         f.write(str(note) + " " + name + "_" + name2 + "\n")
         f.close
         #demande dans la foulée si on veut saisir une autre note. Si oui on retourne au while du début sinon on quitte la boucle
@@ -51,8 +50,18 @@ def add(file): #fonction pour ajouter une nouvelle note
             except:
                 print("Veuillez choisir 1 ou 2!")
                 
-def edit ():
-    print("lol")
+def edit(fichier, nom, note): #fonction pour modifier une note
+    f = open(fichier +".txt",'r')
+    L = f.readlines() #stocke toutes les lignes du fichier dans une liste
+    f.close()
+    for i in range (0, len(L)):
+        if L[i].count(nom) == 1: #dès qu'un élément de la liste (donc une ligne du fichier) contient le nom de la personne dont on veut modifier la note, le programme modifier l'élément avec la nouvelle note
+            L[i] = str(note) + " " + nom + "\n"
+    f = open(fichier + ".txt", 'w') #on ouvre le fichier en écriture et on écrit chaque élément de la liste dans une nouvelle ligne du document
+    for i in range (0, len(L)):
+        ligne = L[i]      
+        f.write(ligne)
+    f.close()
     
 def ask(): #fonction pour demander le nom du devoir. Si on rentre "Annuler", le programme annule l'action en cours et nous renvoie sur le menu principal
     askn = 0
@@ -67,20 +76,20 @@ def ask(): #fonction pour demander le nom du devoir. Si on rentre "Annuler", le 
             print("Désolé, ce fichier n'existe pas.")
             askn = 0
             
-def getNote(file, nbligne):
+def getNote(file, nbligne): #permet d'obtenir une note
     note = "0"
     f=open(file + ".txt",'r')
-    liste = f.readlines()
+    liste = f.readlines() #stocke toutes les lignes dans une liste
     f.close()
     ligne = liste[nbligne]
-    note = ligne.split()
+    note = ligne.split() #divise la ligne en plusieurs mots à chaque espace
     return note[0]
         
     
-def getName(file, nbligne):
+def getName(file, nbligne): #permet d'obtenir un nom
     name = "0"
     f=open(file + ".txt",'r')
-    liste = f.readlines()
+    liste = f.readlines() #stocke toutes les lignes dans une liste
     f.close()
     ligne = liste[nbligne]
     name = ligne.split()
@@ -99,8 +108,8 @@ def lignCount(file):   # fonction qui sert a compter le nombre de ligne
     return i
 
 def new(file): #fonction pour créer un fichier
-    nf=open(file + ".txt",'w')
-    return(nf)
+    f=open(file + ".txt",'w')
+    f.close
    
 def delete(file): #fonction pour supprimer un fichier
     os.remove(path + file + ".txt")
@@ -155,21 +164,17 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 print("Veuillez choisir 1, 2 ou 3!")
             if co == 1:
                 print("Consulter les notes d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
-                fileD = ask()
+                fileD = ask() #demande le nom du fichier
                 if fileD != "Annuler":
                     nbligne = lignCount(fileD)
                     total = 0
                     numberline = 0
-                    for numberline in range (0, nbligne):
+                    for numberline in range (0, nbligne): #obtient pour chaque ligne du document la note et le nom de la personne
                         note = getNote(fileD, numberline)
                         name = getName(fileD, numberline)
-                        print(name + " : " + note)
-                    moyenne = total / nbligne
+                        print(name + " : " + note) #affiche nom + note
                 co = 3
-            if co == 2:
-                nameD = input("Entrer le NOM de l'élève :")
-                name2D = input("Entrer le PRENOM de l'élève :")
-                co = 3
+            
 
     #3 AJOUTER/MODIFIER
     if c == 3:
@@ -196,14 +201,34 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                     filesU = ask()
                     name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
                     name2 = input("Entrer le PRENOM de l'élève :")
-                    name = name.replace(" ", "_")
-                    name2 = name2.replace(" ", "_")
-                    name = name + "_" + name2
-                    edit(filesU)
+                    whilecheck = 0
+                    while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
+                        try:
+                            note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
+                            if note != "Abs":
+                                note = float(note.replace(",",".")) # remplace les virgules par des points pour eviter les erreurs
+                                checkp = note
+                                whilecheck = 1
+                            if checkp < 0:                             #  verifie si la note est positive
+                                print("La note doit être positive!")
+                                whilecheck = 0
+                            if checkp >= 20:                             #  verifie si la note est inférieure ou égale à 20
+                                print("La note doit être comprise entre 0 et 20!")
+                                whilecheck = 0
+                            if note == "Abs":
+                                whilecheck = 1
+                        except:                                     # executer si la note est une chaine de caractères differente de Abs
+                            print("La note n'est pas valide")
+                            whilecheck = 0
+                    name = name.replace(" ", "_").lower()    #
+                    name2 = name2.replace(" ", "_").lower()  # mets le Nom et Prénom au format : nom_prénom
+                    name = name + "_" + name2                #
+                    edit(filesU, name, note) #modifie la note
                 ce = 3
         
     #4 MOYENNE
     if c == 4:
+        redir()
         c = 0
         while ce!= 2:
             print("Souhaitez-vous consulter la moyenne d'un devoir ?:\n 1.Devoir\n 2.Annuler")
@@ -217,13 +242,13 @@ while c != 6: #Tant que c est différent on reste dans le programme sinon si c=6
                 print("Consulter la moyenne d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
                 fichier = ask()        # demande le nom du fichier
                 if fichier != "Annuler":
-                    nbligne = lignCount(fichier)
+                    nbligne = lignCount(fichier) #permet d'obtenir le nombre de lignes dans le fichier
                     total = 0
                     numberline = 0
-                    for numberline in range (0, nbligne):
-                        note2 = getNote(fichier, numberline)
-                        total += float(note2)
-                    moyenne = total / nbligne
+                    for numberline in range (0, nbligne): #permet d'obtenir toutes les notes du fichier en parcourant chaque ligne 
+                        note2 = getNote(fichier, numberline) 
+                        total += float(note2) #incrément le total avec la valeur de la note
+                    moyenne = total / nbligne #total des noytes / nombre de lignes (nombre de notes)
                     print("Moyenne du devoir : "+ moyenne)
                 ce = 2
            
