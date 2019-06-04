@@ -127,8 +127,6 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
     try:
         c = 0
         c = int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
-        if c not in [1,2,3,4,5,6]:
-            print("Veuillez choisir un chiffre entre 1 et 6!")
     except:
         print("Veuillez choisir un chiffre entre 1 et 6!")
     
@@ -310,5 +308,8 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
     #6 QUITTER
     elif c == 6:
         menu = False
+        
+    else:
+        print("Veuillez choisir un chiffre entre 1 et 6!")
         
         
