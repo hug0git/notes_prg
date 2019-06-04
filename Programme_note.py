@@ -170,7 +170,6 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                 fileD = ask() #demande le nom du fichier
                 if fileD != "Annuler":
                     nbligne = lignCount(fileD)
-                    total = 0
                     numberline = 0
                     for numberline in range (0, nbligne): #obtient pour chaque ligne du document la note et le nom de la personne
                         note = getNote(fileD, numberline)
@@ -180,6 +179,16 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
             if co == 2:
                 nameD = input("Entrer le NOM de l'élève :")
                 name2D = input("Entrer le PRENOM de l'élève :")
+                listef = [ f for f in os.listdir('.') if os.path.isfile(os.path.join('.',f)) ]
+                for numerofichier in range (0, len(listef)):
+                    fichier = listef[numerofichier].replace(".txt", "")
+                    nbligne = lignCount(fichier)
+                    numberline = 0
+                    for numberline in range (0, nbligne): #obtient pour chaque ligne du document la note et le nom de la personne
+                        note = getNote(fichier, numberline)
+                        name = getName(fichier, numberline)
+                        if name == nameD.lower() + " " + name2D.lower():
+                            print(fichier + " : " + note) #affiche nom + note
                 co = 3
 
     #3 AJOUTER/MODIFIER
