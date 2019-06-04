@@ -290,7 +290,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                                 total += float(note) #incrément le total avec la valeur de la note
                             else:
                                 nbnote -= 1  #nbnote = nbnote - 1
-                moyenne = total / nbnote #total des noytes / nombre de lignes (nombre de notes)
+                moyenne = total / nbnote #total des notes / nombre de lignes (nombre de notes)
                 print("Moyenne de " + name2 + " : "+ str(moyenne))
                 ce = 3
            
