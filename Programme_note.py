@@ -17,6 +17,7 @@ def add(file): #fonction pour ajouter une nouvelle note
         name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
         name2 = input("Entrer le PRENOM de l'élève :")
         whilecheck = 0
+        checkp = 0
         while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
             try:
                 note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
@@ -207,6 +208,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                     name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
                     name2 = input("Entrer le PRENOM de l'élève :")
                     whilecheck = 0
+                    checkp = 0
                     while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
                         try:
                             note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
