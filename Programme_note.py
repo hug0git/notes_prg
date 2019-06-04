@@ -268,8 +268,11 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                             total += float(note2) #incrément le total avec la valeur de la note
                         else:
                             nbnote -= 1  #nbnote = nbnote - 1
-                    moyenne = total / nbnote #total des noytes / nombre de lignes (nombre de notes)
-                    print("Moyenne du devoir : "+ str(moyenne))
+                    if nbnote >= 0:
+                        moyenne = total / nbnote #total des noytes / nombre de lignes (nombre de notes)
+                        print("Moyenne du devoir : "+ str(moyenne))
+                    else:
+                        print("Aucune note...")
                 ce = 3
             if ce == 2:
                 print("Consulter la moyenne d'un élève.")
@@ -290,8 +293,11 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                                 total += float(note) #incrément le total avec la valeur de la note
                             else:
                                 nbnote -= 1  #nbnote = nbnote - 1
-                moyenne = total / nbnote #total des notes / nombre de lignes (nombre de notes)
-                print("Moyenne de " + name2 + " : "+ str(moyenne))
+                if nbnote >= 0:
+                    moyenne = total / nbnote #total des notes / nombre de lignes (nombre de notes)
+                    print("Moyenne de " + name2 + " : "+ str(moyenne))
+                else:
+                    print("Aucune note...")
                 ce = 3
            
     #5 SUPPRIMER
