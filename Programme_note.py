@@ -125,7 +125,6 @@ def redir():
 while menu: #Tant que c est différent on reste dans le programme sinon si c=6 ==> "Quitter" donc on sort du programme
     print("MENU:\n 1.Nouveau devoir\n 2.Consulter des notes\n 3.Ajouter/Modifier des notes\n 4.Obtenir une moyenne\n 5.Supprimer un devoir\n 6.Quitter\n")
     try:
-        c = 0
         c = int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
     except:
         print("Veuillez choisir un chiffre entre 1 et 6!")
