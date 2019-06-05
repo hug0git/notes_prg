@@ -16,27 +16,7 @@ def add(file): #fonction pour ajouter une nouvelle note
         ca = 0
         name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
         name2 = input("Entrer le PRENOM de l'élève :")
-        whilecheck = 0
-        checkp = 0
-        while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
-            try:
-                note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
-                if note != "Abs":
-                    note = float(note.replace(",",".")) # remplace les virgules par des points pour eviter les erreurs
-                    checkp = note
-                    whilecheck = 1
-                if checkp < 0:                             #  verifie si la note est positive
-                    print("La note doit être positive!")
-                    whilecheck = 0
-                if checkp >= 20:                             #  verifie si la note est inférieure ou égale à 20
-                    print("La note doit être comprise entre 0 et 20!")
-                    whilecheck = 0
-                if note == "Abs":
-                    whilecheck = 1
-            except:                                     # executer si la note est une chaine de caractères differente de Abs
-                print("La note n'est pas valide")
-                whilecheck = 0
-        
+        note = askNote()
         f = open(file +".txt",'a') #ouvre le fichier et écrit nom, prénom et note
         name = name.replace(" ", "_").lower()
         name2 = name2.replace(" ", "_").lower()
@@ -87,7 +67,29 @@ def getNote(file, nbligne): #permet d'obtenir une note
     note = ligne.split() #divise la ligne en plusieurs mots à chaque espace
     return note[0]
         
-    
+def askNote():
+    whilecheck = 0
+    checkp = 0
+    while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
+        try:
+            note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
+            if note != "Abs":
+                note = float(note.replace(",",".")) # remplace les virgules par des points pour eviter les erreurs
+                checkp = note
+                whilecheck = 1
+            if checkp < 0:                             #  verifie si la note est positive
+                print("La note doit être positive!")
+                whilecheck = 0
+            if checkp >= 20:                             #  verifie si la note est inférieure ou égale à 20
+                print("La note doit être comprise entre 0 et 20!")
+                whilecheck = 0
+            if note == "Abs":
+                whilecheck = 1
+        except:                                     # executer si la note est une chaine de caractères differente de Abs
+            print("La note n'est pas valide")
+            whilecheck = 0
+    return note    
+        
 def getName(file, nbligne): #permet d'obtenir un nom
     name = "0"
     f=open(file + ".txt",'r')
@@ -213,26 +215,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                     filesU = ask()
                     name = input("Entrer le NOM de l'élève :") # entrez le nom de l'éleve
                     name2 = input("Entrer le PRENOM de l'élève :")
-                    whilecheck = 0
-                    checkp = 0
-                    while whilecheck == 0:   # permet de vérifier la validité de la note (nombre positif ou Abs)
-                        try:
-                            note = input("Entrer une note (positive et sur 20) ou Abs si l'élève était absent:")
-                            if note != "Abs":
-                                note = float(note.replace(",",".")) # remplace les virgules par des points pour eviter les erreurs
-                                checkp = note
-                                whilecheck = 1
-                            if checkp < 0:                             #  verifie si la note est positive
-                                print("La note doit être positive!")
-                                whilecheck = 0
-                            if checkp >= 20:                             #  verifie si la note est inférieure ou égale à 20
-                                print("La note doit être comprise entre 0 et 20!")
-                                whilecheck = 0
-                            if note == "Abs":
-                                whilecheck = 1
-                        except:                                     # executer si la note est une chaine de caractères differente de Abs
-                            print("La note n'est pas valide")
-                            whilecheck = 0
+                    note = askNote()
                     name = name.replace(" ", "_").lower()    #
                     name2 = name2.replace(" ", "_").lower()  # mets le Nom et Prénom au format : nom_prénom
                     name = name + "_" + name2                #
