@@ -221,64 +221,7 @@ while menu: #Tant que c est différent on reste dans le programme sinon si c=6 =
                     name = name + "_" + name2                #
                     edit(filesU, name, note) #modifie la note
                 ce = 3
-        
-    #4 MOYENNE
-    elif c == 4:
-        redir()
-        c = 0
-        while ce!= 3:
-            print("Souhaitez-vous consulter la moyenne d'un devoir ou d'un élève ?:\n 1.Devoir\n 2.Elève\n 3.Annuler")
-            try:
-                ce = int(input("Que souhaitez-vous faire ? (Saisissez le numéro correspondant à l'action de votre choix):"))
-                if ce not in [1,2,3]:
-                    print("Veuillez choisir 1, 2 ou 3!")
-            except:
-                print("Veuillez choisir 1, 2 ou 3!")
-            if ce == 1:
-                print("Consulter la moyenne d'un devoir. Saisissez le nom du devoir ou \"Annuler\" pour sortir de ce menu")
-                fichier = ask()        # demande le nom du fichier
-                if fichier != "Annuler":
-                    nbligne = lignCount(fichier) #permet d'obtenir le nombre de lignes dans le fichier
-                    total = 0
-                    numberline = 0
-                    nbnote = nbligne
-                    for numberline in range (0, nbligne): #permet d'obtenir toutes les notes du fichier en parcourant chaque ligne 
-                        note2 = getNote(fichier, numberline) 
-                        if note2 != "Abs": 
-                            total += float(note2) #incrément le total avec la valeur de la note
-                        else:
-                            nbnote -= 1  #nbnote = nbnote - 1
-                    if nbnote >= 0:
-                        moyenne = total / nbnote #total des noytes / nombre de lignes (nombre de notes)
-                        print("Moyenne du devoir : "+ str(moyenne))
-                    else:
-                        print("Aucune note...")
-                ce = 3
-            if ce == 2:
-                print("Consulter la moyenne d'un élève.")
-                nameM = input("Entrer le NOM de l'élève :")
-                name2M = input("Entrer le PRENOM de l'élève :")
-                listef = [ f for f in os.listdir('.') if os.path.isfile(os.path.join('.',f)) ]
-                total = 0
-                nbnote = len(listef)
-                for numerofichier in range (0, len(listef)):
-                    fichier = listef[numerofichier].replace(".txt", "")
-                    nbligne = lignCount(fichier)
-                    name2 = nameM.lower() + " " + name2M.lower()
-                    for numberline in range (0, nbligne): #obtient pour chaque ligne du document la note et le nom de la personne
-                        note = getNote(fichier, numberline)
-                        name = getName(fichier, numberline)
-                        if name == name2:
-                            if note != "Abs": 
-                                total += float(note) #incrément le total avec la valeur de la note
-                            else:
-                                nbnote -= 1  #nbnote = nbnote - 1
-                if nbnote >= 0:
-                    moyenne = total / nbnote #total des notes / nombre de lignes (nombre de notes)
-                    print("Moyenne de " + name2 + " : "+ str(moyenne))
-                else:
-                    print("Aucune note...")
-                ce = 3
+      
            
     #5 SUPPRIMER
     elif c == 5:
